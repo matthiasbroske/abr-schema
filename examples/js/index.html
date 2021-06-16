@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABR Schema Test</title>
+</head>
+<body>
+    <div style="display: inline;">
+        <textarea rows="50" cols="80" id="editor">
+{
+    "version": "0.2.0-beta2",
+    "scene": {
+        "backgroundColor": "#FFFFFF"
+    }
+}
+        </textarea>
+        <button id="update" style="vertical-align: top;" onclick="updateState()">Validate</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ajv/6.12.3/ajv.min.js"></script>
+
+    <script>
+        const SCHEMA_URL = 'https://raw.githubusercontent.com/ivlab/abr-schema/master/ABRSchema_0-2-0.json'
+        let v = null;
+        let schema = fetch(SCHEMA_URL).then((resp) => resp.json()).then((j) => {
+            let p = document.createElement('p');
+            p.textContent = 'Schema loaded';
+            document.body.append(p);
+            v = new Ajv();
+            v.addSchema(j, SCHEMA_URL);
+        });
+
+        let editor = document.getElementById('editor');
+        function updateState() {
+            if (v.validate(SCHEMA_URL, JSON.parse(editor.value))) {
+                alert('Validated');
+            } else {
+                alert('Error validating schema, check in console');
+                console.log(v.errors);
+            }
+        }
+    </script>
+</body>
+</html>
