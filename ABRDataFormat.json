@@ -1,0 +1,80 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "description": "Custom, hierarchical format for the Artifact-Based Rendering data",
+    "properties": {
+        "children": { "$ref": "#/" },
+        "keyData": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "description": "Path describing this geometric data object",
+                    "$ref": "#/definitions/DataPath"
+                },
+                "vertices": {
+                    "description": "Where to find vertices in the dataset",
+                    "$ref": "#/definitions/DataFileInfo"
+                },
+                "indices": {
+                    "description": "Where to find indices in the dataset",
+                    "$ref": "#/definitions/DataFileInfo"
+                },
+                "cellIndexOffsets": {
+                    "description": "Where to find index offsets for cells",
+                    "$ref": "#/definitions/DataFileInfo"
+                },
+                "cellIndexCounts": {
+                    "description": "Where to find number of cell indices",
+                    "$ref": "#/definitions/DataFileInfo"
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Matrix4x4": {
+            "type": "object",
+            "properties": {
+                "m00": { "type": "number" },
+                "m01": { "type": "number" },
+                "m02": { "type": "number" },
+                "m03": { "type": "number" },
+                "m10": { "type": "number" },
+                "m11": { "type": "number" },
+                "m12": { "type": "number" },
+                "m13": { "type": "number" },
+                "m20": { "type": "number" },
+                "m21": { "type": "number" },
+                "m22": { "type": "number" },
+                "m23": { "type": "number" },
+                "m30": { "type": "number" },
+                "m31": { "type": "number" },
+                "m32": { "type": "number" },
+                "m33": { "type": "number" }
+            }
+        },
+
+        "DataPath": {
+            "type": "string",
+            "$comment": "Update whenever a new data source is added to the data server. Eventually should pull this bit of schema from the data server.",
+            "pattern": "^([^/]+)\/([^/]+)\/(KeyData|ScalarVar|VectorVar)\/([^/]+)$"
+        },
+
+        "DataFileInfo": {
+            "description": "Info for data located in separate data files",
+            "type": "object",
+            "properties": {
+                "fileName": {
+                    "description": "The file in which the data is present",
+                    "type": "string"
+                },
+                "offset": {
+                    "description": "Byte offset in the `fileName` file in which to find the data",
+                    "type": "integer"
+                },
+                "length": {
+                    "description": "Byte length in the `fileName` file",
+                    "type": "integer"
+                }
+            }
+        }
+    }
+}
