@@ -175,7 +175,7 @@
                     "type": "string",
                     "description": "What type of data impression is it? (one of the plate types specified in the spec)",
                     "$comment": "Change this when adding a new plate type",
-                    "enum": ["Glyphs", "Ribbons", "Surfaces"]
+                    "enum": ["Glyphs", "Ribbons", "Surfaces", "Volumes"]
                 },
                 "uuid": {
                     "format": "uuid",
@@ -239,6 +239,15 @@
                     "then": {
                         "properties": { "inputValues": { "$ref": "#/definitions/Plates/Surfaces" } }
                     }
+                },
+                {
+                    "$comment": "Put all plate types here to ensure state validity",
+                    "if": {
+                        "properties": { "plateType": { "const": "Volumes" } }
+                    },
+                    "then": {
+                        "properties": { "inputValues": { "$ref": "#/definitions/Plates/Volumes" } }
+                    }
                 }
             ]
         },
@@ -259,7 +268,7 @@
                 },
                 "parameterName": {
                     "type": "string",
-                    "description": "Which visual parameter is being affected by this input (e.g. `Colormap` and `Color Variable` both affect to the `Color` parameter)"
+                    "description": "Which visual parameter is being affected by this input (e.g. `Colormap` and `Color Variable` both affect the `Color` parameter)"
                 },
                 "inputGenre": {
                     "type": "string",
@@ -630,6 +639,61 @@
                             "parameterName": { "const": "Pattern" },
                             "inputValue": { "default": "100%", "$ref": "#/definitions/InputStringTypes/PercentPrimitive" },
                             "inputGenre": { "const": "Primitive" }
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Volumes": {
+                "$comment": "Update Plates whenever you add a new plate type. Inputs should have a `inputType` and `parameterName`.",
+                "type": "object",
+                "properties": {
+                    "Key Data": {
+                        "properties": {
+                                "inputType": { "const": "IVLab.ABREngine.VolumeKeyData" },
+                                "parameterName": { "const": "Key Data" },
+                                "inputGenre": { "const": "KeyData" },
+                                "inputValue": { "$ref": "#/definitions/InputStringTypes/DataPath" }
+                        }
+                    },
+                    "Color Variable": {
+                        "properties": {
+                                "inputType": { "const": "IVLab.ABREngine.ScalarDataVariable" },
+                                "parameterName": { "const": "Color" },
+                                "inputGenre": { "const": "Variable" },
+                                "inputValue": { "$ref": "#/definitions/InputStringTypes/DataPath" }
+                        }
+                    },
+                    "Colormap": {
+                        "properties": {
+                                "inputType": { "const": "IVLab.ABREngine.ColormapVisAsset" },
+                                "parameterName": { "const": "Color" },
+                                "inputGenre": { "const": "VisAsset" },
+                                "inputValue": { "$ref": "#/definitions/InputStringTypes/UUID" }
+                        }
+                    },
+                    "Opacitymap": {
+                        "properties": {
+                            "inputType": { "const": "IVLab.ABREngine.ColormapVisAsset" },
+                            "parameterName": { "const": "Color" },
+                            "inputGenre": { "const": "VisAsset" },
+                            "inputValue": { "$ref": "#/definitions/InputStringTypes/UUID" }
+                        }
+                    },
+                    "Volume Brightness": {
+                        "properties": {
+                                "inputType": { "const": "IVLab.ABREngine.PercentPrimitive" },
+                                "parameterName": { "const": "Volume" },
+                                "inputValue": { "default": "10%", "$ref": "#/definitions/InputStringTypes/PercentPrimitive" },
+                                "inputGenre": { "const": "Primitive" }
+                        }
+                    },
+                    "Volume Opacity Multiplier": {
+                        "properties": {
+                                "inputType": { "const": "IVLab.ABREngine.PercentPrimitive" },
+                                "parameterName": { "const": "Volume" },
+                                "inputValue": { "default": "10%", "$ref": "#/definitions/InputStringTypes/PercentPrimitive" },
+                                "inputGenre": { "const": "Primitive" }
                         }
                     }
                 },
