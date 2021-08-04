@@ -448,6 +448,14 @@
                                 "inputGenre": { "const": "Primitive" },
                                 "inputValue": { "default": "0.05m", "$ref": "#/definitions/InputStringTypes/LengthPrimitive" }
                         }
+                    },
+                    "Glyph Density": {
+                        "properties": {
+                                "inputType": { "const": "IVLab.ABREngine.PercentPrimitive" },
+                                "parameterName": { "const": "Glyph" },
+                                "inputGenre": { "const": "Primitive" },
+                                "inputValue": { "default": "100%", "$ref": "#/definitions/InputStringTypes/PercentPrimitive" }
+                        }
                     }
                 },
                 "additionalProperties": false
