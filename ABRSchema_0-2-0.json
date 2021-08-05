@@ -458,7 +458,7 @@
                         }
                     }
                 },
-                "additionalProperties": false
+                "additionalProperties": true
             },
             "Ribbons": {
                 "$comment": "Update Plates whenever you add a new plate type. Inputs should have a `inputType` and `parameterName`.",
