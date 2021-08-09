@@ -86,11 +86,17 @@
                     "type": "object",
                     "description": "Ranges for scalar variables",
                     "$comment": "Unfortunately must explicitly specify DataPath key here",
+                    "required": ["min", "max"],
                     "patternProperties": { 
                         "^([^/]+)\/([^/]+)\/(ScalarVar)\/([^/]+)$": {
                             "type": "object",
                             "description": "Minimum and maximum for a scalar variable",
                             "properties": {
+                                "keyDataPath": {
+                                    "type": "string",
+                                    "description": "To allow for multiple ranges on a variable that is used in multiple places, we can add an additional specifier here to tie a particular range to a key data object.",
+                                    "pattern": "^([^/]+)\/([^/]+)\/(KeyData)\/([^/]+)$"
+                                },
                                 "min": { "type": "number" },
                                 "max": { "type": "number" }
                             }
