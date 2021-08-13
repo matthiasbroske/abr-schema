@@ -86,11 +86,11 @@
                     "type": "object",
                     "description": "Ranges for scalar variables",
                     "$comment": "Unfortunately must explicitly specify DataPath key here",
-                    "required": ["min", "max"],
                     "patternProperties": { 
                         "^([^/]+)\/([^/]+)\/(ScalarVar)\/([^/]+)$": {
                             "type": "object",
                             "description": "Minimum and maximum for a scalar variable",
+                            "required": ["min", "max"],
                             "properties": {
                                 "keyDataPath": {
                                     "type": "string",
