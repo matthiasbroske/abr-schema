@@ -167,7 +167,7 @@
         "primitiveGradients": {
             "type": "array",
             "description": "Gradients of Primitives (simple numeric values)",
-            "items": {"$ref": "#/definitions/PrimtiveGradient"}
+            "items": {"$ref": "#/definitions/PrimitiveGradient"}
         }
     },
 
