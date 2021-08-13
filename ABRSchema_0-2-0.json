@@ -84,7 +84,7 @@
             "properties": {
                 "scalarRanges": {
                     "type": "object",
-                    "description": "Ranges for scalar variables. Custom, per-keydata ranges can be specified as well, by adding KeyData -> ScalarVariables to this dictionary",
+                    "description": "Ranges for scalar variables. This object contains the global, systemwide definitions for var ranges.",
                     "$comment": "Must explicitly specify DataPath key here",
                     "patternProperties": { 
                         "^([^/]+)\/([^/]+)\/(ScalarVar)\/([^/]+)$": {
@@ -95,7 +95,14 @@
                                 "min": { "type": "number" },
                                 "max": { "type": "number" }
                             }
-                        },
+                        }
+                    }
+                },
+                "specificScalarRanges": {
+                    "type": "object",
+                    "description": "Ranges for scalar variables. Custom, per-keydata ranges are specified here.",
+                    "$comment": "Must explicitly specify DataPath key here",
+                    "patternProperties": { 
                         "^([^/]+)\/([^/]+)\/(KeyData)\/([^/]+)$": {
                             "type": "object",
                             "description": "Definition of minimum / maximum that applies to this key data object only",
