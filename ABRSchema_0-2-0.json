@@ -708,7 +708,7 @@
                         "properties": {
                             "inputType": { "const": "IVLab.ABREngine.PrimitiveGradient" },
                             "parameterName": { "const": "Color" },
-                            "inputGenre": { "const": "PrimitiveGradient" },
+                            "inputGenre": { "const": "Primitive" },
                             "inputValue": { "$ref": "#/definitions/InputStringTypes/IntegerPrimitive" }
                         }
                     },
