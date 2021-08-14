@@ -706,13 +706,10 @@
                     },
                     "Opacitymap": {
                         "properties": {
-                            "inputType": { "const": "IVLab.ABREngine.ColormapVisAsset" },
+                            "inputType": { "const": "IVLab.ABREngine.PrimitiveGradient" },
                             "parameterName": { "const": "Color" },
                             "inputGenre": { "const": "VisAsset" },
-                            "inputValue": {
-                                "type": "number",
-                                "description": "Index within primitiveGradients that refers to this opacity map"
-                            }
+                            "inputValue": { "$ref": "#/definitions/InputStringTypes/IntegerPrimitive" }
                         }
                     },
                     "Volume Brightness": {
