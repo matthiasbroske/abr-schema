@@ -327,6 +327,10 @@
             "type": "object",
             "description": "A gradient of VisAssets",
             "properties": {
+                "uuid": {
+                    "type": "string",
+                    "format": "uuid"
+                },
                 "gradientScale": {
                     "type": "string",
                     "description": "Is it a continuous or discrete gradient?",
