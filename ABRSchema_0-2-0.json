@@ -279,7 +279,7 @@
                 "inputGenre": {
                     "type": "string",
                     "description": "Which genre of input (e.g. `Variable`, `VisAsset`, or `Primitive`)",
-                    "enum": ["KeyData", "Variable", "VisAsset", "Primitive"]
+                    "enum": ["KeyData", "Variable", "VisAsset", "Primitive", "PrimitiveGradient"]
                 }
             },
             "additionalProperties": false
