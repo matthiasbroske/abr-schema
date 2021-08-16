@@ -342,12 +342,12 @@
                 },
                 "points": {
                     "type": "array",
-                    "description": "The floating point 'stops' in the gradient. Must be the same length as `visAssets`",
+                    "description": "The floating point 'stops' in the gradient. Must be length of `visAssets` - 1",
                     "items": { "type": "number" }
                 },
                 "visAssets": {
                     "type": "array",
-                    "description": "The UUIDs of the VisAssets in the gradient. Must be the same length as `points`",
+                    "description": "The UUIDs of the VisAssets in the gradient. Must be length of `points` + 1",
                     "items": { "format": "uuid" }
                 }
             }
