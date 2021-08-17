@@ -84,15 +84,35 @@
             "properties": {
                 "scalarRanges": {
                     "type": "object",
-                    "description": "Ranges for scalar variables",
-                    "$comment": "Unfortunately must explicitly specify DataPath key here",
+                    "description": "Ranges for scalar variables. This object contains the global, systemwide definitions for var ranges.",
+                    "$comment": "Must explicitly specify DataPath key here",
                     "patternProperties": { 
                         "^([^/]+)\/([^/]+)\/(ScalarVar)\/([^/]+)$": {
                             "type": "object",
-                            "description": "Minimum and maximum for a scalar variable",
+                            "description": "Systemwide definition for minimum / maximum of a variable",
+                            "required": ["min", "max"],
                             "properties": {
                                 "min": { "type": "number" },
                                 "max": { "type": "number" }
+                            }
+                        }
+                    }
+                },
+                "specificScalarRanges": {
+                    "type": "object",
+                    "description": "Ranges for scalar variables. Custom, per-keydata ranges are specified here.",
+                    "$comment": "Must explicitly specify DataPath key here",
+                    "patternProperties": { 
+                        "^([^/]+)\/([^/]+)\/(KeyData)\/([^/]+)$": {
+                            "type": "object",
+                            "description": "Definition of minimum / maximum that applies to this key data object only",
+                            "patternProperties": {
+                                "^([^/]+)\/([^/]+)\/(ScalarVar)\/([^/]+)$": {
+                                    "type": "object",
+                                    "required": ["min", "max"],
+                                        "min": { "type": "number" },
+                                        "max": { "type": "number" }
+                                }
                             }
                         }
                     }
