@@ -728,6 +728,14 @@
                                 "inputValue": { "default": "10%", "$ref": "#/definitions/InputStringTypes/PercentPrimitive" },
                                 "inputGenre": { "const": "Primitive" }
                         }
+                    },
+                    "Volume Lighting": {
+                        "properties": {
+                                "inputType": { "const": "IVLab.ABREngine.BooleanPrimitive" },
+                                "parameterName": { "const": "Volume" },
+                                "inputValue": { "default": "true", "$ref": "#/definitions/InputStringTypes/BooleanPrimitive" },
+                                "inputGenre": { "const": "Primitive" }
+                        }
                     }
                 },
                 "additionalProperties": false
