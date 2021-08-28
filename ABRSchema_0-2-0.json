@@ -682,6 +682,7 @@
                 "type": "object",
                 "properties": {
                     "Key Data": {
+                        "description": "Volume data source.",
                         "properties": {
                                 "inputType": { "const": "IVLab.ABREngine.VolumeKeyData" },
                                 "parameterName": { "const": "Key Data" },
@@ -690,6 +691,7 @@
                         }
                     },
                     "Color Variable": {
+                        "description": "Scalar values that make up the volume.",
                         "properties": {
                                 "inputType": { "const": "IVLab.ABREngine.ScalarDataVariable" },
                                 "parameterName": { "const": "Color" },
@@ -698,6 +700,7 @@
                         }
                     },
                     "Colormap": {
+                        "description": "Defines the color of the volume at control points along its scalar range.",
                         "properties": {
                                 "inputType": { "const": "IVLab.ABREngine.ColormapVisAsset" },
                                 "parameterName": { "const": "Color" },
@@ -706,6 +709,7 @@
                         }
                     },
                     "Opacitymap": {
+                        "description": "Defines the opacity of the volume at control points along its scalar range.",
                         "properties": {
                             "inputType": { "const": "IVLab.ABREngine.PrimitiveGradient" },
                             "parameterName": { "const": "Color" },
@@ -714,6 +718,7 @@
                         }
                     },
                     "Volume Brightness": {
+                        "description": "Manual brightness adjustment for the volume",
                         "properties": {
                                 "inputType": { "const": "IVLab.ABREngine.PercentPrimitive" },
                                 "parameterName": { "const": "Volume" },
@@ -722,6 +727,7 @@
                         }
                     },
                     "Volume Opacity Multiplier": {
+                        "description": "How opaque the volume should appear. 0% - fully transparent; 100% - fully opaque.",
                         "properties": {
                                 "inputType": { "const": "IVLab.ABREngine.PercentPrimitive" },
                                 "parameterName": { "const": "Volume" },
@@ -730,6 +736,7 @@
                         }
                     },
                     "Volume Lighting": {
+                        "description": "Whether or not the volume should react to lighting.",
                         "properties": {
                                 "inputType": { "const": "IVLab.ABREngine.BooleanPrimitive" },
                                 "parameterName": { "const": "Volume" },
