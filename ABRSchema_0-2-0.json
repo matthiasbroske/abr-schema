@@ -461,6 +461,24 @@
                                 "inputValue": { "$ref": "#/definitions/InputStringTypes/UUID" }
                         }
                     },
+                    "Forward Variable": {
+                        "description": "Variable to point glyph 'forward' direction along",
+                        "properties": {
+                                "inputType": { "const": "IVLab.ABREngine.VectorDataVariable" },
+                                "parameterName": { "const": "Direction" },
+                                "inputGenre": { "const": "Variable" },
+                                "inputValue": { "$ref": "#/definitions/InputStringTypes/DataPath" }
+                        }
+                    },
+                    "Up Variable": {
+                        "description": "Variable to point glyph 'up' direction along",
+                        "properties": {
+                                "inputType": { "const": "IVLab.ABREngine.VectorDataVariable" },
+                                "parameterName": { "const": "Direction" },
+                                "inputGenre": { "const": "Variable" },
+                                "inputValue": { "$ref": "#/definitions/InputStringTypes/DataPath" }
+                        }
+                    },
                     "Glyph Size": {
                         "properties": {
                                 "inputType": { "const": "IVLab.ABREngine.LengthPrimitive" },
