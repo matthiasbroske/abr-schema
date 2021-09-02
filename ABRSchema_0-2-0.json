@@ -166,9 +166,11 @@
         },
 
         "primitiveGradients": {
-            "type": "array",
+            "type": "object",
             "description": "Gradients of Primitives (simple numeric values)",
-            "items": {"$ref": "#/definitions/PrimitiveGradient"}
+            "patternProperties": {
+                "^([a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}){1}$":  {"$ref": "#/definitions/PrimitiveGradient"}
+            }
         }
     },
 
@@ -714,7 +716,7 @@
                             "inputType": { "const": "IVLab.ABREngine.PrimitiveGradient" },
                             "parameterName": { "const": "Color" },
                             "inputGenre": { "const": "PrimitiveGradient" },
-                            "inputValue": { "$ref": "#/definitions/InputStringTypes/IntegerPrimitive" }
+                            "inputValue": { "$ref": "#/definitions/InputStringTypes/UUID" }
                         }
                     },
                     "Volume Brightness": {
