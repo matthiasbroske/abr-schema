@@ -724,7 +724,7 @@
                         "properties": {
                                 "inputType": { "const": "IVLab.ABREngine.PercentPrimitive" },
                                 "parameterName": { "const": "Volume" },
-                                "inputValue": { "default": "10%", "$ref": "#/definitions/InputStringTypes/PercentPrimitive" },
+                                "inputValue": { "default": "50%", "$ref": "#/definitions/InputStringTypes/PercentPrimitive" },
                                 "inputGenre": { "const": "Primitive" }
                         }
                     },
