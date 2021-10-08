@@ -57,6 +57,7 @@
                 },
                 "lighting": {
                     "type": "array",
+                    "maxItems": 3,
                     "items": {
                         "type": "object",
                         "properties": {
@@ -178,10 +179,18 @@
             }
         },
 
-        "gradients": {
+        "visassetGradients": {
             "type": "array",
             "description": "Gradients of VisAssets that are stored in the state",
-            "items": {"$ref": "#/definitions/Gradient"}
+            "items": {"$ref": "#/definitions/VisAssetGradient"}
+        },
+
+        "primitiveGradients": {
+            "type": "object",
+            "description": "Gradients of Primitives (simple numeric values)",
+            "patternProperties": {
+                "^([a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}){1}$":  {"$ref": "#/definitions/PrimitiveGradient"}
+            }
         }
     },
 
@@ -195,7 +204,7 @@
                     "type": "string",
                     "description": "What type of data impression is it? (one of the plate types specified in the spec)",
                     "$comment": "Change this when adding a new plate type",
-                    "enum": ["Glyphs", "Ribbons", "Surfaces"]
+                    "enum": ["Glyphs", "Ribbons", "Surfaces", "Volumes"]
                 },
                 "uuid": {
                     "format": "uuid",
@@ -259,6 +268,15 @@
                     "then": {
                         "properties": { "inputValues": { "$ref": "#/definitions/Plates/Surfaces" } }
                     }
+                },
+                {
+                    "$comment": "Put all plate types here to ensure state validity",
+                    "if": {
+                        "properties": { "plateType": { "const": "Volumes" } }
+                    },
+                    "then": {
+                        "properties": { "inputValues": { "$ref": "#/definitions/Plates/Volumes" } }
+                    }
                 }
             ]
         },
@@ -279,12 +297,12 @@
                 },
                 "parameterName": {
                     "type": "string",
-                    "description": "Which visual parameter is being affected by this input (e.g. `Colormap` and `Color Variable` both affect to the `Color` parameter)"
+                    "description": "Which visual parameter is being affected by this input (e.g. `Colormap` and `Color Variable` both affect the `Color` parameter)"
                 },
                 "inputGenre": {
                     "type": "string",
                     "description": "Which genre of input (e.g. `Variable`, `VisAsset`, or `Primitive`)",
-                    "enum": ["KeyData", "Variable", "VisAsset", "Primitive"]
+                    "enum": ["KeyData", "Variable", "VisAsset", "Primitive", "PrimitiveGradient"]
                 }
             },
             "additionalProperties": false
@@ -305,7 +323,7 @@
             }
         },
 
-        "Gradient": {
+        "VisAssetGradient": {
             "type": "object",
             "description": "A gradient of VisAssets",
             "properties": {
@@ -327,6 +345,32 @@
                     "type": "array",
                     "description": "The UUIDs of the VisAssets in the gradient. Must be the same length as `points`",
                     "items": { "format": "uuid" }
+                }
+            }
+        },
+
+        "PrimitiveGradient": {
+            "type": "object",
+            "description": "Generic numeric map to be used by styling inputs like opacity, variable glyph size, etc.",
+            "properties": {
+                "points": {
+                    "type": "array",
+                    "description": "Control points (percentages 0.0-1.0)",
+                    "items": { "type": "number" }
+                },
+                "values": {
+                    "type": "array",
+                    "description": "Primitive values at a particular point",
+                    "items": {
+                        "oneOf": [
+                            { "$ref": "#/definitions/InputStringTypes/FloatPrimitive" },
+                            { "$ref": "#/definitions/InputStringTypes/PercentPrimitive" },
+                            { "$ref": "#/definitions/InputStringTypes/BooleanPrimitive" },
+                            { "$ref": "#/definitions/InputStringTypes/LengthPrimitive" },
+                            { "$ref": "#/definitions/InputStringTypes/AnglePrimitive" },
+                            { "$ref": "#/definitions/InputStringTypes/IntegerPrimitive" }
+                        ]
+                    }
                 }
             }
         },
@@ -676,6 +720,76 @@
                             "parameterName": { "const": "Pattern" },
                             "inputValue": { "default": "100%", "$ref": "#/definitions/InputStringTypes/PercentPrimitive" },
                             "inputGenre": { "const": "Primitive" }
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Volumes": {
+                "$comment": "Update Plates whenever you add a new plate type. Inputs should have a `inputType` and `parameterName`.",
+                "type": "object",
+                "properties": {
+                    "Key Data": {
+                        "description": "Volume data source.",
+                        "properties": {
+                                "inputType": { "const": "IVLab.ABREngine.VolumeKeyData" },
+                                "parameterName": { "const": "Key Data" },
+                                "inputGenre": { "const": "KeyData" },
+                                "inputValue": { "$ref": "#/definitions/InputStringTypes/DataPath" }
+                        }
+                    },
+                    "Color Variable": {
+                        "description": "Scalar values that make up the volume.",
+                        "properties": {
+                                "inputType": { "const": "IVLab.ABREngine.ScalarDataVariable" },
+                                "parameterName": { "const": "Color" },
+                                "inputGenre": { "const": "Variable" },
+                                "inputValue": { "$ref": "#/definitions/InputStringTypes/DataPath" }
+                        }
+                    },
+                    "Colormap": {
+                        "description": "Defines the color of the volume at control points along its scalar range.",
+                        "properties": {
+                                "inputType": { "const": "IVLab.ABREngine.ColormapVisAsset" },
+                                "parameterName": { "const": "Color" },
+                                "inputGenre": { "const": "VisAsset" },
+                                "inputValue": { "$ref": "#/definitions/InputStringTypes/UUID" }
+                        }
+                    },
+                    "Opacitymap": {
+                        "description": "Defines the opacity of the volume at control points along its scalar range.",
+                        "properties": {
+                            "inputType": { "const": "IVLab.ABREngine.PrimitiveGradient" },
+                            "parameterName": { "const": "Color" },
+                            "inputGenre": { "const": "PrimitiveGradient" },
+                            "inputValue": { "$ref": "#/definitions/InputStringTypes/UUID" }
+                        }
+                    },
+                    "Volume Brightness": {
+                        "description": "Manual brightness adjustment for the volume",
+                        "properties": {
+                                "inputType": { "const": "IVLab.ABREngine.PercentPrimitive" },
+                                "parameterName": { "const": "Volume" },
+                                "inputValue": { "default": "50%", "$ref": "#/definitions/InputStringTypes/PercentPrimitive" },
+                                "inputGenre": { "const": "Primitive" }
+                        }
+                    },
+                    "Volume Opacity Multiplier": {
+                        "description": "How opaque the volume should appear. 0% - fully transparent; 100% - fully opaque.",
+                        "properties": {
+                                "inputType": { "const": "IVLab.ABREngine.PercentPrimitive" },
+                                "parameterName": { "const": "Volume" },
+                                "inputValue": { "default": "10%", "$ref": "#/definitions/InputStringTypes/PercentPrimitive" },
+                                "inputGenre": { "const": "Primitive" }
+                        }
+                    },
+                    "Volume Lighting": {
+                        "description": "Whether or not the volume should react to lighting.",
+                        "properties": {
+                                "inputType": { "const": "IVLab.ABREngine.BooleanPrimitive" },
+                                "parameterName": { "const": "Volume" },
+                                "inputValue": { "default": "true", "$ref": "#/definitions/InputStringTypes/BooleanPrimitive" },
+                                "inputGenre": { "const": "Primitive" }
                         }
                     }
                 },
