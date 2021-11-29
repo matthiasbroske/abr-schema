@@ -179,10 +179,12 @@
             }
         },
 
-        "visassetGradients": {
-            "type": "array",
+        "visAssetGradients": {
+            "type": "object",
             "description": "Gradients of VisAssets that are stored in the state",
-            "items": {"$ref": "#/definitions/VisAssetGradient"}
+            "patternProperties": {
+                "^([a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}){1}$":  {"$ref": "#/definitions/VisAssetGradient"}
+            }
         },
 
         "primitiveGradients": {
