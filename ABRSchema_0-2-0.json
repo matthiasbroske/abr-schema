@@ -451,10 +451,10 @@
             },
             "Bounds": {
                 "type": "object",
-                "required": ["center", "size"],
+                "required": ["center", "extents"],
                 "properties": {
                     "center": { "$ref": "#/definitions/UnityObjects/Vector3" },
-                    "size": { "$ref": "#/definitions/UnityObjects/Vector3" }
+                    "extents": { "$ref": "#/definitions/UnityObjects/Vector3" }
                 }
             }
         },
