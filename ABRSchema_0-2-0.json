@@ -489,7 +489,7 @@
                     },
                     "Colormap": {
                         "properties": {
-                                "inputType": { "const": "IVLab.ABREngine.ColormapVisAsset" },
+                                "inputType": { "const": "IVLab.ABREngine.ABRColormap" },
                                 "parameterName": { "const": "Color" },
                                 "inputGenre": { "const": "VisAsset" },
                                 "inputValue": { "$ref": "#/definitions/InputStringTypes/UUID" }
@@ -505,7 +505,7 @@
                     },
                     "Glyph": {
                         "properties": {
-                                "inputType": { "const": "IVLab.ABREngine.GlyphVisAsset" },
+                                "inputType": { "const": "IVLab.ABREngine.ABRGlyph" },
                                 "parameterName": { "const": "Glyph" },
                                 "inputGenre": { "const": "VisAsset" },
                                 "inputValue": { "$ref": "#/definitions/InputStringTypes/UUID" }
@@ -569,7 +569,7 @@
                     },
                     "Colormap": {
                         "properties": {
-                            "inputType": { "const": "IVLab.ABREngine.ColormapVisAsset" },
+                            "inputType": { "const": "IVLab.ABREngine.ABRColormap" },
                             "parameterName": { "const": "Color" },
                             "inputGenre": { "const": "VisAsset" },
                             "inputValue": { "$ref": "#/definitions/InputStringTypes/UUID" }
@@ -585,7 +585,7 @@
                     },
                     "Texture": {
                         "properties": {
-                            "inputType": { "const": "IVLab.ABREngine.LineTextureVisAsset" },
+                            "inputType": { "const": "IVLab.ABREngine.ABRLine" },
                             "parameterName": { "const": "Texture" },
                             "inputGenre": { "const": "VisAsset" },
                             "inputValue": { "$ref": "#/definitions/InputStringTypes/UUID" }
@@ -668,7 +668,7 @@
                     },
                     "Colormap": {
                         "properties": {
-                            "inputType": { "const": "IVLab.ABREngine.ColormapVisAsset" },
+                            "inputType": { "const": "IVLab.ABREngine.ABRColormap" },
                             "parameterName": { "const": "Color" },
                             "inputGenre": { "const": "VisAsset" },
                             "inputValue": { "$ref": "#/definitions/InputStringTypes/UUID" }
@@ -684,7 +684,7 @@
                     },
                     "Pattern": {
                         "properties": {
-                            "inputType": { "const": "IVLab.ABREngine.SurfaceTextureVisAsset" },
+                            "inputType": { "const": "IVLab.ABREngine.ABRTexture" },
                             "parameterName": { "const": "Pattern" },
                             "inputGenre": { "const": "VisAsset" },
                             "inputValue": { "$ref": "#/definitions/InputStringTypes/UUID" }
@@ -756,7 +756,7 @@
                     "Colormap": {
                         "description": "Defines the color of the volume at control points along its scalar range.",
                         "properties": {
-                                "inputType": { "const": "IVLab.ABREngine.ColormapVisAsset" },
+                                "inputType": { "const": "IVLab.ABREngine.ABRColormap" },
                                 "parameterName": { "const": "Color" },
                                 "inputGenre": { "const": "VisAsset" },
                                 "inputValue": { "$ref": "#/definitions/InputStringTypes/UUID" }
