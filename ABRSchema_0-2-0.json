@@ -179,10 +179,12 @@
             }
         },
 
-        "visassetGradients": {
-            "type": "array",
+        "visAssetGradients": {
+            "type": "object",
             "description": "Gradients of VisAssets that are stored in the state",
-            "items": {"$ref": "#/definitions/VisAssetGradient"}
+            "patternProperties": {
+                "^([a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}){1}$":  {"$ref": "#/definitions/VisAssetGradient"}
+            }
         },
 
         "primitiveGradients": {
@@ -327,6 +329,10 @@
             "type": "object",
             "description": "A gradient of VisAssets",
             "properties": {
+                "uuid": {
+                    "type": "string",
+                    "format": "uuid"
+                },
                 "gradientScale": {
                     "type": "string",
                     "description": "Is it a continuous or discrete gradient?",
@@ -338,12 +344,12 @@
                 },
                 "points": {
                     "type": "array",
-                    "description": "The floating point 'stops' in the gradient. Must be the same length as `visAssets`",
+                    "description": "The floating point 'stops' in the gradient. Must be length of `visAssets` - 1",
                     "items": { "type": "number" }
                 },
                 "visAssets": {
                     "type": "array",
-                    "description": "The UUIDs of the VisAssets in the gradient. Must be the same length as `points`",
+                    "description": "The UUIDs of the VisAssets in the gradient. Must be length of `points` + 1",
                     "items": { "format": "uuid" }
                 }
             }
@@ -499,10 +505,15 @@
                     },
                     "Glyph": {
                         "properties": {
-                                "inputType": { "const": "IVLab.ABREngine.GlyphVisAsset" },
-                                "parameterName": { "const": "Glyph" },
-                                "inputGenre": { "const": "VisAsset" },
-                                "inputValue": { "$ref": "#/definitions/InputStringTypes/UUID" }
+                            "inputType": {
+                                "oneOf": [
+                                    { "const": "IVLab.ABREngine.GlyphVisAsset" },
+                                    { "const": "IVLab.ABREngine.GlyphGradient" }
+                                ]
+                            },
+                            "parameterName": { "const": "Glyph" },
+                            "inputGenre": { "const": "VisAsset" },
+                            "inputValue": { "$ref": "#/definitions/InputStringTypes/UUID" }
                         }
                     },
                     "Forward Variable": {
@@ -579,7 +590,12 @@
                     },
                     "Texture": {
                         "properties": {
-                            "inputType": { "const": "IVLab.ABREngine.LineTextureVisAsset" },
+                            "inputType": {
+                                "oneOf": [
+                                    { "const": "IVLab.ABREngine.LineTextureVisAsset" },
+                                    { "const": "IVLab.ABREngine.LineTextureGradient" }
+                                ]
+                            },
                             "parameterName": { "const": "Texture" },
                             "inputGenre": { "const": "VisAsset" },
                             "inputValue": { "$ref": "#/definitions/InputStringTypes/UUID" }
@@ -678,7 +694,12 @@
                     },
                     "Pattern": {
                         "properties": {
-                            "inputType": { "const": "IVLab.ABREngine.SurfaceTextureVisAsset" },
+                            "inputType": {
+                                "oneOf": [
+                                    { "const": "IVLab.ABREngine.SurfaceTextureVisAsset" },
+                                    { "const": "IVLab.ABREngine.SurfaceTextureGradient" }
+                                ]
+                            },
                             "parameterName": { "const": "Pattern" },
                             "inputGenre": { "const": "VisAsset" },
                             "inputValue": { "$ref": "#/definitions/InputStringTypes/UUID" }
