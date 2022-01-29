@@ -720,7 +720,7 @@
                             "parameterName": { "const": "Pattern" },
                             "inputValue": { 
                                 "$ref": "#/definitions/InputStringTypes/PercentPrimitive",
-                                "default": "100%"
+                                "default": "10%"
                             },
                             "inputGenre": { "const": "Primitive" }
                         }
