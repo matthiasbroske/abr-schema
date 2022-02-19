@@ -777,6 +777,14 @@
                                 "inputValue": { "$ref": "#/definitions/InputStringTypes/UUID" }
                         }
                     },
+                    "Opacity Variable": {
+                        "properties": {
+                                "inputType": { "const": "IVLab.ABREngine.ScalarDataVariable" },
+                                "parameterName": { "const": "Color" },
+                                "inputGenre": { "const": "Variable" },
+                                "inputValue": { "$ref": "#/definitions/InputStringTypes/DataPath" }
+                        }
+                    },
                     "Opacitymap": {
                         "description": "Defines the opacity of the volume at control points along its scalar range.",
                         "properties": {
