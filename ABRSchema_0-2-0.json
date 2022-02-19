@@ -795,7 +795,7 @@
                                 "inputGenre": { "const": "Primitive" }
                         }
                     },
-                    "Volume Opacity Multiplier": {
+                    "Volume Opacity": {
                         "description": "How opaque the volume should appear. 0% - fully transparent; 100% - fully opaque.",
                         "properties": {
                                 "inputType": { "const": "IVLab.ABREngine.PercentPrimitive" },
